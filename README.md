@@ -1,4 +1,5 @@
 # Beam Software Engineering Intern Exercise
+![.NET Core Build](https://github.com/Lucria/beam_intern_test/workflows/.NET%20Core%20Build/badge.svg)
 
 This is a system that is capable of fetching a set number of 
 scooters specified by a user for a given latitude, longitude within 
