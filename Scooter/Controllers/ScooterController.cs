@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 namespace Beam_intern.Scooter.Controllers
 {
     [ApiController]
-    [Route("api/beam")]
+    [Route("scooters/[controller]")]
     public class ScooterController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
@@ -24,7 +24,7 @@ namespace Beam_intern.Scooter.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<ScooterDataModel> Get()
+        public IEnumerable<ScooterDataModel> GetAll()
         {
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new ScooterDataModel
@@ -34,6 +34,14 @@ namespace Beam_intern.Scooter.Controllers
                 Longitude = rng.Next(Summaries.Length)
             })
             .ToArray();
+        }
+
+        [HttpGet("{id}")]
+        public ScooterDataModel Get(Guid id)
+        {
+            var rng = new Random();
+            var test = new ScooterDataModel {Id = id};
+            return test;
         }
     }
 }
