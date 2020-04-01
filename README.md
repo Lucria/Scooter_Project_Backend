@@ -28,13 +28,13 @@ Docker will also bring further convenience during development.
 
 Using HTTPS:
 ```
-Example
+git clone https://github.com/Lucria/beam_intern_test.git
 ```
 
 Using SSH:
 
 ```
-Example
+git clone git@github.com:Lucria/beam_intern_test.git
 ```
 
 * Run `dotnet restore` in the root directory to restore NuGet dependencies.
