@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 namespace Beam_intern.Scooter.Controllers
 {
     [ApiController]
-    [Route("scooters/[controller]")]
+    [Route("scooters/")]
     public class ScooterController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
