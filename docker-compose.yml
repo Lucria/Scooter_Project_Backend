@@ -10,11 +10,19 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       DB_CONNECTION_STRING: "host=db;port=5432;database=scooters;username=beam;password=beam"
+    restart: always
 
   db:
     image: postgres:12.1
+    container_name: scooter_db
+    volumes:
+      - test_db:/data/
     restart: always
     environment:
       POSTGRES_USER: "beam"
       POSTGRES_PASSWORD: "beam"
       POSTGRES_DB: "scooters"
+
+volumes:
+  test_db:
+    external: true
