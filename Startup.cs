@@ -1,3 +1,4 @@
+using Beam_intern.Database;
 using Beam_intern.Scooter.Repository;
 using Beam_intern.Scooter.Services;
 using Microsoft.AspNetCore.Builder;
@@ -24,8 +25,8 @@ namespace Beam_intern
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
-            
-            services.AddControllers();
+
+            services.AddHostedService<DbMigratorHostedService>();
             
             // For connection to postgres DB (with PostGis)
             var connection = "Host=db;port=5432;database=scooters;username=beam;password=beam";
