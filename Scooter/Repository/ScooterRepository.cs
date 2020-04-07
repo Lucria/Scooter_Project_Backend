@@ -91,10 +91,12 @@ namespace Beam_intern.Scooter.Repository
 
         private ScooterDataModel ToScooterDataModel(ScooterDomainModel scooterDomainModel)
         {
-            return new ScooterDataModel(
-                scooterDomainModel.Id,
-                scooterDomainModel.Latitude,
-                scooterDomainModel.Longitude);
+            return new ScooterDataModel
+            {
+                Id = scooterDomainModel.Id,
+                Latitude = scooterDomainModel.Latitude,
+                Longitude = scooterDomainModel.Longitude
+            };
         }
     }
 }
