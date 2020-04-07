@@ -54,7 +54,7 @@ namespace Beam_intern.Scooter.Controllers
                 return NotFound();
             }
 
-            return Ok(ToScooterResponse(result));
+            return Created(Request.Path.Value + "/" + result.Id, result);
         }
 
         [HttpPut("{id}")]
