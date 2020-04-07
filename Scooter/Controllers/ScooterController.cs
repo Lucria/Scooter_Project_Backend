@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Beam_intern.Scooter.Data;
+using System.Threading.Tasks;
+using Beam_intern.Scooter.Domain;
+using Beam_intern.Scooter.Models;
+using Beam_intern.Scooter.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -13,37 +16,40 @@ namespace Beam_intern.Scooter.Controllers
     [Route("scooters/")]
     public class ScooterController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
+        private readonly IScooterRepository _repository;
         private readonly ILogger<ScooterController> _logger;
 
-        public ScooterController(ILogger<ScooterController> logger)
+        public ScooterController(ILogger<ScooterController> logger, IScooterRepository repository)
         {
             _logger = logger;
+            _repository = repository;
         }
 
         [HttpGet]
-        public IEnumerable<ScooterDataModel> GetAll()
+        public async Task<ActionResult<IEnumerable<ScooterDomainModel>>> GetAll()
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new ScooterDataModel
-            {
-                Id = new Guid(),
-                Latitude = rng.Next(-20, 55),
-                Longitude = rng.Next(Summaries.Length)
-            })
-            .ToArray();
+            var result = await _repository.GetAll();
+            return Ok(result.Select(ToScooterResponse));
         }
 
         [HttpGet("{id}")]
-        public ScooterDataModel Get(Guid id)
+        public async Task<ActionResult<ScooterDomainModel>> Get(Guid id)
         {
-            var rng = new Random();
-            var test = new ScooterDataModel {Id = id};
-            return test;
+            var result = await _repository.Get(id);
+            if (result == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(ToScooterResponse(result));
+        }
+
+        private ScooterResponseModel ToScooterResponse (ScooterDomainModel scooterDomainModel)
+        {
+            return new ScooterResponseModel(
+                scooterDomainModel.Id, 
+                scooterDomainModel.Latitude, 
+                scooterDomainModel.Longitude);
         }
     }
 }

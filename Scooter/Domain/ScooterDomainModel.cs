@@ -2,9 +2,9 @@
 
 namespace Beam_intern.Scooter.Domain
 {
-    public class Scooter
+    public class ScooterDomainModel
     {
-        public Scooter(Guid guid, double latitude, double longitude)
+        public ScooterDomainModel(Guid guid, double latitude, double longitude)
         {
             Id = guid;
             Latitude = latitude;
