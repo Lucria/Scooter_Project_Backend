@@ -44,7 +44,7 @@ namespace Beam_intern.Scooter.Controllers
             return Ok(ToScooterResponse(result));
         }
 
-        [HttpPost]
+        [HttpPost("create")]
         public async Task<ActionResult<ScooterDomainModel>> Patch([FromBody] ScooterRequestModel requestModel)
         {
             Guid newId = new Guid();
