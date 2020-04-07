@@ -47,8 +47,8 @@ namespace Beam_intern.Scooter.Controllers
             return Ok(ToScooterResponse(result));
         }
 
-        [HttpGet("closest/")]
-        public async Task<ActionResult<IEnumerable<ScooterDomainModel>>> GetClosest([FromBody] ScooterClosestRequestModel scooterClosestRequestModel)
+        [HttpPost("closest/")]
+        public ActionResult<IEnumerable<ScooterDomainModel>> GetClosest([FromBody] ScooterClosestRequestModel scooterClosestRequestModel)
         // X number of scooters
         // within Y metres radius
         // At chosen latitude and longitude
@@ -59,7 +59,7 @@ namespace Beam_intern.Scooter.Controllers
                 scooterClosestRequestModel.Radius,
                 scooterClosestRequestModel.ChosenLatitude,
                 scooterClosestRequestModel.ChosenLongitude);
-            var result =  await _scooterService.GetClosest(scooterClosestDomainModel);
+            var result =  _scooterService.GetClosest(scooterClosestDomainModel);
             if (result == null)
             {
                 return NotFound();

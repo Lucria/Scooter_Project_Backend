@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Beam_intern.Scooter.CoordinatesHelper;
 using Beam_intern.Scooter.Domain;
@@ -42,12 +43,22 @@ namespace Beam_intern.Scooter.Services
             return _repository.Delete(id);
         }
 
-        public Task<IEnumerable<ScooterDomainModel>> GetClosest(ScooterClosestDomainModel scooterClosestDomainModel)
+        public IEnumerable<ScooterDomainModel> GetClosest(ScooterClosestDomainModel scooterClosestDomainModel)
         {
             Coordinates centreCoordinate = scooterClosestDomainModel.CentreCoordinate;
             int nearestNumberOfScooters = scooterClosestDomainModel.NearestNumberOfScooters;
             int radius = scooterClosestDomainModel.Radius;
-            throw new NotImplementedException();
+            IEnumerable<ScooterDomainModel> allScooters = _repository.GetAll().Result;
+            IEnumerable<ScooterDomainModel> allNearestScooters = new List<ScooterDomainModel>();
+            foreach (ScooterDomainModel scooter in allScooters)
+            {
+                Coordinates scooterCoordinate = new Coordinates(scooter.Latitude, scooter.Longitude);
+                if (CoordinatesDistanceExtensions.DistanceTo(scooterCoordinate, centreCoordinate) <= radius)
+                {
+                    allNearestScooters.Append(scooter);
+                }
+            }
+            return allNearestScooters;
         }
     }
 }

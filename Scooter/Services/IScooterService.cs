@@ -12,6 +12,6 @@ namespace Beam_intern.Scooter.Services
         Task<ScooterDomainModel> Add(ScooterDomainModel scooterDomainModel);
         Task<ScooterDomainModel> Update(Guid id, double latitude, double longitude);
         Task<ScooterDomainModel> Delete(Guid id);
-        Task<IEnumerable<ScooterDomainModel>> GetClosest(ScooterClosestDomainModel scooterClosestDomainModel);
+        IEnumerable<ScooterDomainModel> GetClosest(ScooterClosestDomainModel scooterClosestDomainModel);
     }
 }
