@@ -5,7 +5,6 @@ COPY ./Beam_intern.csproj .
 RUN dotnet restore
 
 COPY ./ .
-RUN dotnet publish -c Release -o out
 
 EXPOSE 5000-5001
 ENTRYPOINT ["dotnet", "run"]
