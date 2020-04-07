@@ -1,4 +1,3 @@
-using System;
 using Beam_intern.Scooter.Repository;
 using Beam_intern.Scooter.Services;
 using Microsoft.AspNetCore.Builder;
@@ -22,22 +21,14 @@ namespace Beam_intern
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services, IWebHostEnvironment env)
+        public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             
             services.AddControllers();
             
             // For connection to postgres DB (with PostGis)
-            if (env.IsDevelopment())
-            {
-                services.AddDbContext<ScooterDbContext>(options => options.UseNpgsql("Postgres"));
-            }
-            else
-            {
-                services.AddDbContext<ScooterDbContext>(options => options.UseNpgsql(Environment.GetEnvironmentVariable("DB_CONNECTION_STRING") 
-                                                                                     ?? throw new Exception("No connection string specified")));
-            }
+            services.AddDbContext<ScooterDbContext>(options => options.UseNpgsql("Postgres"));
 
             // Adding objects for dependency injection
             services.AddScoped<IScooterRepository, ScooterRepository>();

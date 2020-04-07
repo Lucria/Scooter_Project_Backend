@@ -3,16 +3,15 @@
 services:
   webapi:
     container_name: beam_webapi
-    build:
-      context: .
+    build: .
     ports:
       - 5000:5000
       - 5001:5001
     depends_on:
-      - "db"
+      - db
     environment:
       ASPNETCORE_ENVIRONMENT: Development
-      DB_CONNECTION_STRING: "host=db;port=5432;database=scooters;username=beam;password=beam"
+      DB_CONNECTION_STRING: "Host=db;Port=5432;Database=scooters;Username=beam;Password=beam"
     restart: always
 
   db:
@@ -22,6 +21,7 @@ services:
       - test_db:/var/lib/postgresql/data/beam
     restart: always
     environment:
+      COMPOSE_CONVERT_WINDOWS_PATHS: 1
       POSTGRES_USER: "beam"
       POSTGRES_PASSWORD: "beam"
       POSTGRES_DB: "scooters"
