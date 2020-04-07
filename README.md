@@ -12,20 +12,23 @@ This repository will house both the frontend and backend for this system.
 The database system will be hosted using a Docker file.
 
 ## Rough Architecture Diagram
-![](Rough%20Architecture%20Diagram.png) 
+![Architecture Diagram](Rough%20Architecture%20Diagram.png) 
 
-## Getting Started
-### Prerequisites
-* .NET Core v3.0 minimum
+## Prerequisites
+* .NET Core v3.1
 
-You may type `dotnet --version` to verify that the downloaded version is 3.0 or above.
+    You may type `dotnet --version` to verify that the downloaded version is 3.0 or above. 
+    Follow the instructions [here](https://dotnet.microsoft.com/download) to download .NET Core.
 
-* Docker
+* Docker **(Essential)**
 
-The application is designed to be run as a Docker container, especially the database.
-Docker will also bring further convenience during development.  
+    The application is designed to be run within a Docker container, especially the database.
+Docker will also bring further convenience during development. Therefore, it is essential that
+Docker is installed in your computer for testing.
 
-### Installing
+    Follow the instructions [here](https://www.docker.com/products/docker-desktop) to download Docker.
+
+## Installing
 
 * Clone the repository to your local machine using Git.  
 
@@ -40,9 +43,14 @@ Using SSH:
 git clone git@github.com:Lucria/beam_intern_test.git
 ```
 
-* Run `dotnet restore` in the root directory to restore NuGet dependencies.
+### Web API Server and Database
+1) Run `dotnet restore` in the root directory to restore NuGet dependencies.
 
-### Running
+### Frontend
+1) Run `yarn` to restore all dependencies and modules.
+2) Run `yarn dev` to start up the frontend webpage. 
+
+## Running
 From within the root folder, run 
 ```
 docker volume create test_db
