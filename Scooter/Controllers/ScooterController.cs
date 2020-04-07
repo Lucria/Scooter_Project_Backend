@@ -44,6 +44,30 @@ namespace Beam_intern.Scooter.Controllers
             return Ok(ToScooterResponse(result));
         }
 
+        [HttpPut("{id}")]
+        public async Task<ActionResult<ScooterDomainModel>> Put(Guid id, [FromBody] ScooterRequestModel requestModel)
+        {
+            var result = await _repository.Update(id, requestModel.latitude, requestModel.longitude);
+            if (result == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(ToScooterResponse(result));
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<ScooterDomainModel>> Delete(Guid id)
+        {
+            var result = await _repository.Delete(id);
+            if (result == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(ToScooterResponse(result));
+        }
+
         private ScooterResponseModel ToScooterResponse (ScooterDomainModel scooterDomainModel)
         {
             return new ScooterResponseModel(
