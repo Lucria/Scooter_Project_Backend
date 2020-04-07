@@ -42,11 +42,15 @@ git clone git@github.com:Lucria/beam_intern_test.git
 
 * Run `dotnet restore` in the root directory to restore NuGet dependencies.
 
-## Tests
+### Running
+From within the root folder, run `docker-compose up`. This will
+build and deploy the backend API server as well as the PostgresSQL
+database.
 
-TODO: To add steps on how to run automated tests for this system
+## Testing
+
+Automated Testing to be added in the future
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
-
+TODO: To be added in the future
