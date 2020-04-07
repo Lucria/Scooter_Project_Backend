@@ -55,6 +55,8 @@ namespace Beam_intern
             {
                 app.UseHsts();
             }
+
+            app.UseRouting();
             app.UseSwagger();
             app.UseSwaggerUI(options => options.SwaggerEndpoint("/swagger/v0/swagger.json", "Beam Intern Engineering Test API"));
 
