@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Beam_intern.Scooter.Domain;
 
-namespace Beam_intern.Scooter.Repository
+namespace Beam_intern.Scooter.Services
 {
-    public interface IScooterRepository
+    public interface IScooterService
     {
         Task<IEnumerable<ScooterDomainModel>> GetAll();
         Task<ScooterDomainModel> Get(Guid id);
