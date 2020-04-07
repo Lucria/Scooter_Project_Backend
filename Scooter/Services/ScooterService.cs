@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Beam_intern.Scooter.CoordinatesHelper;
 using Beam_intern.Scooter.Domain;
 using Beam_intern.Scooter.Repository;
 
@@ -43,6 +44,9 @@ namespace Beam_intern.Scooter.Services
 
         public Task<IEnumerable<ScooterDomainModel>> GetClosest(ScooterClosestDomainModel scooterClosestDomainModel)
         {
+            Coordinates centreCoordinate = scooterClosestDomainModel.CentreCoordinate;
+            int nearestNumberOfScooters = scooterClosestDomainModel.NearestNumberOfScooters;
+            int radius = scooterClosestDomainModel.Radius;
             throw new NotImplementedException();
         }
     }

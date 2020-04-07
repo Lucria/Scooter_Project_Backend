@@ -31,14 +31,14 @@ namespace Beam_intern.Scooter.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ScooterDomainModel>>> GetAll()
         {
-            var result = await _repository.GetAll();
+            var result = await _scooterService.GetAll();
             return Ok(result.Select(ToScooterResponse));
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<ScooterDomainModel>> Get(Guid id)
         {
-            var result = await _repository.Get(id);
+            var result = await _scooterService.Get(id);
             if (result == null)
             {
                 return NotFound();
@@ -72,7 +72,7 @@ namespace Beam_intern.Scooter.Controllers
         public async Task<ActionResult<ScooterDomainModel>> Post([FromBody] ScooterRequestModel requestModel)
         {
             ScooterDomainModel scooterDomainModel = new ScooterDomainModel(Guid.NewGuid(), requestModel.latitude, requestModel.longitude);
-            var result = await _repository.Add(scooterDomainModel);
+            var result = await _scooterService.Add(scooterDomainModel);
             if (result == null)
             {
                 return NotFound();
@@ -84,7 +84,7 @@ namespace Beam_intern.Scooter.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<ScooterDomainModel>> Put(Guid id, [FromBody] ScooterRequestModel requestModel)
         {
-            var result = await _repository.Update(id, requestModel.latitude, requestModel.longitude);
+            var result = await _scooterService.Update(id, requestModel.latitude, requestModel.longitude);
             if (result == null)
             {
                 return NotFound();
@@ -96,7 +96,7 @@ namespace Beam_intern.Scooter.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<ScooterDomainModel>> Delete(Guid id)
         {
-            var result = await _repository.Delete(id);
+            var result = await _scooterService.Delete(id);
             if (result == null)
             {
                 return NotFound();
