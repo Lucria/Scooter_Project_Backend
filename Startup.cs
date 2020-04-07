@@ -19,11 +19,26 @@ namespace Beam_intern
             Configuration = configuration;
         }
 
+        
+        private const string CorsPolicy = "CORS Policy";
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
+            services.AddCors(options =>
+            {
+                options.AddPolicy(CorsPolicy,
+                    builder =>
+                    {
+                        builder.AllowAnyMethod()
+                            .AllowAnyOrigin()
+                            .AllowAnyHeader();
+                    });
+            });
+
+            
             services.AddControllers().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             services.AddHostedService<DbMigratorHostedService>();
@@ -53,6 +68,7 @@ namespace Beam_intern
                 app.UseHsts();
             }
 
+            app.UseCors(CorsPolicy);
             app.UseRouting();
             
             app.UseSwagger();
