@@ -5,8 +5,7 @@ services:
     container_name: beam_webapi
     build: .
     ports:
-      - 5000:5000
-      - 5001:5001
+      - 5000:80
     depends_on:
       - db
     environment:
