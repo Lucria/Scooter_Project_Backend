@@ -78,7 +78,7 @@ namespace Beam_intern.Scooter.Controllers
                 return NotFound();
             }
 
-            return Ok(ToScooterResponse(result));
+            return NoContent();
         }
 
         private ScooterResponseModel ToScooterResponse (ScooterDomainModel scooterDomainModel)
