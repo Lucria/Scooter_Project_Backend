@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Beam_intern.Scooter.Domain;
 using Beam_intern.Scooter.Models;
 using Beam_intern.Scooter.Repository;
+using Beam_intern.Scooter.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -18,11 +19,13 @@ namespace Beam_intern.Scooter.Controllers
     {
         private readonly IScooterRepository _repository;
         private readonly ILogger<ScooterController> _logger;
+        private readonly IScooterService _scooterService;
 
-        public ScooterController(ILogger<ScooterController> logger, IScooterRepository repository)
+        public ScooterController(ILogger<ScooterController> logger, IScooterRepository repository, IScooterService scooterService)
         {
             _logger = logger;
             _repository = repository;
+            _scooterService = scooterService;
         }
 
         [HttpGet]
@@ -42,6 +45,27 @@ namespace Beam_intern.Scooter.Controllers
             }
 
             return Ok(ToScooterResponse(result));
+        }
+
+        [HttpGet("closest/")]
+        public async Task<ActionResult<IEnumerable<ScooterDomainModel>>> GetClosest([FromBody] ScooterClosestRequestModel scooterClosestRequestModel)
+        // X number of scooters
+        // within Y metres radius
+        // At chosen latitude and longitude
+        {
+            // Need change request model to a domain model
+            ScooterClosestDomainModel scooterClosestDomainModel = new ScooterClosestDomainModel(
+                scooterClosestRequestModel.NearestNumberOfScooters,
+                scooterClosestRequestModel.Radius,
+                scooterClosestRequestModel.ChosenLatitude,
+                scooterClosestRequestModel.ChosenLongitude);
+            var result =  await _scooterService.GetClosest(scooterClosestDomainModel);
+            if (result == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(result.Select(ToScooterResponse));
         }
 
         [HttpPost]

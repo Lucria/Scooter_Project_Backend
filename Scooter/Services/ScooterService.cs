@@ -40,5 +40,10 @@ namespace Beam_intern.Scooter.Services
         {
             return _repository.Delete(id);
         }
+
+        public Task<IEnumerable<ScooterDomainModel>> GetClosest(ScooterClosestDomainModel scooterClosestDomainModel)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
