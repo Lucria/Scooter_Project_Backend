@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Beam_intern.Scooter.Data;
+using Microsoft.EntityFrameworkCore;
 
 public class ScooterDbContext : DbContext
 {
@@ -6,4 +7,11 @@ public class ScooterDbContext : DbContext
     {
         
     }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+       
+    }
+    
+    public DbSet<ScooterDataModel> Scooters { get; set; }
 }

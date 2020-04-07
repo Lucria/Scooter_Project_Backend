@@ -9,7 +9,10 @@ The goal of building this system is for Beam's Software Engineering Internship
 Exercise. 
 
 This repository will house both the frontend and backend for this system.
-The database system will be hosted using a Docker file. 
+The database system will be hosted using a Docker file.
+
+## Rough Architecture Diagram
+![](Rough%20Architecture%20Diagram.png) 
 
 ## Getting Started
 ### Prerequisites

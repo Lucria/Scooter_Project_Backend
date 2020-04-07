@@ -6,6 +6,12 @@ namespace Beam_intern.Scooter.Repository
 {
     public class ScooterRepository : IScooterRepository
     {
+        private readonly ScooterDbContext _databaseContext;
+
+        public ScooterRepository(ScooterDbContext databaseContext)
+        {
+            this._databaseContext = databaseContext;
+        }
         public Task<IEnumerable<Domain.Scooter>> GetAll()
         {
             throw new NotImplementedException();
