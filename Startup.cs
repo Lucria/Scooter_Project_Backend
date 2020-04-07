@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Beam_intern.Scooter.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -27,10 +28,18 @@ namespace Beam_intern
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllers().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            
             services.AddControllers();
             
-            services.AddDbContext<ScooterDbContext>(options => options.UseNpgsql("Scooter Database"));
+            // For connection to postgres DB (with PostGis)
+            var connection = "Host=localhost;Database=scooters;Username=beam;Password=beam";
+            services.AddDbContext<ScooterDbContext>(options => options.UseNpgsql(connection));
             
+            // Adding objects for dependency injection
+            services.AddScoped<IScooterRepository, ScooterRepository>();
+            
+            // For Swagger API documentation
             services.AddSwaggerGen(options =>
                 options.SwaggerDoc("v0", new OpenApiInfo {Title = "Scooter Location API", Version = "v0"}));
         }
@@ -42,11 +51,10 @@ namespace Beam_intern
             {
                 app.UseDeveloperExceptionPage();
             }
-            
-            app.UseRouting();
-
-            app.UseAuthorization();
-            
+            else
+            {
+                app.UseHsts();
+            }
             app.UseSwagger();
             app.UseSwaggerUI(options => options.SwaggerEndpoint("/swagger/v0/swagger.json", "Beam Intern Engineering Test API"));
 

@@ -7,7 +7,9 @@ using Microsoft.Extensions.Logging;
 
 namespace Beam_intern.Scooter.Controllers
 {
+    // REST controller
     [ApiController]
+    // URL extension
     [Route("scooters/")]
     public class ScooterController : ControllerBase
     {
