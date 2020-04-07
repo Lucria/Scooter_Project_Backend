@@ -41,15 +41,14 @@ namespace Beam_intern.Scooter.Repository
             return scooterDomainModel;
         }
 
-        public async Task<ScooterDomainModel> Add(Guid id, double latitude, double longitude)
+        public async Task<ScooterDomainModel> Add(ScooterDomainModel scooterDomainModel)
         {
-            var scooterDomainModel = new ScooterDomainModel(id, latitude, longitude);
-            var scooterDataModel = ToScooterDataModel(scooterDomainModel);
+            ScooterDataModel scooterDataModel = ToScooterDataModel(scooterDomainModel);
 
             await _databaseContext.AddAsync(scooterDataModel);
             await _databaseContext.SaveChangesAsync();
 
-            return await Get(id);
+            return await Get(scooterDomainModel.Id);
         }
 
         public async Task<ScooterDomainModel> Update(Guid id, double latitude, double longitude)

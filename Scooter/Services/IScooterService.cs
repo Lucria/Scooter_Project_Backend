@@ -9,7 +9,7 @@ namespace Beam_intern.Scooter.Services
     {
         Task<IEnumerable<ScooterDomainModel>> GetAll();
         Task<ScooterDomainModel> Get(Guid id);
-        Task<ScooterDomainModel> Add(Guid id, double latitude, double longitude);
+        Task<ScooterDomainModel> Add(ScooterDomainModel scooterDomainModel);
         Task<ScooterDomainModel> Update(Guid id, double latitude, double longitude);
         Task<ScooterDomainModel> Delete(Guid id);
     }

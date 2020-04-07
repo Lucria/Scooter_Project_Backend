@@ -26,9 +26,9 @@ namespace Beam_intern.Scooter.Services
             return _repository.Get(id);
         }
 
-        public Task<ScooterDomainModel> Add(Guid id, double latitude, double longitude)
+        public Task<ScooterDomainModel> Add(ScooterDomainModel scooterDomainModel)
         {
-            return _repository.Add(id, latitude, longitude);
+            return _repository.Add(scooterDomainModel);
         }
 
         public Task<ScooterDomainModel> Update(Guid id, double latitude, double longitude)

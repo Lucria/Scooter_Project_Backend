@@ -44,11 +44,11 @@ namespace Beam_intern.Scooter.Controllers
             return Ok(ToScooterResponse(result));
         }
 
-        [HttpPost("create")]
-        public async Task<ActionResult<ScooterDomainModel>> Patch([FromBody] ScooterRequestModel requestModel)
+        [HttpPost]
+        public async Task<ActionResult<ScooterDomainModel>> Post([FromBody] ScooterRequestModel requestModel)
         {
-            Guid newId = new Guid();
-            var result = await _repository.Add(newId, requestModel.latitude, requestModel.longitude);
+            ScooterDomainModel scooterDomainModel = new ScooterDomainModel(Guid.NewGuid(), requestModel.latitude, requestModel.longitude);
+            var result = await _repository.Add(scooterDomainModel);
             if (result == null)
             {
                 return NotFound();
