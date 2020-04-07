@@ -28,7 +28,8 @@ namespace Beam_intern
             services.AddControllers();
             
             // For connection to postgres DB (with PostGis)
-            services.AddDbContext<ScooterDbContext>(options => options.UseNpgsql("Postgres"));
+            var connection = "Host=db;port=5432;database=scooters;username=beam;password=beam";
+            services.AddDbContext<ScooterDbContext>(options => options.UseNpgsql(connection));
 
             // Adding objects for dependency injection
             services.AddScoped<IScooterRepository, ScooterRepository>();
