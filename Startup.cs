@@ -28,8 +28,8 @@ namespace Beam_intern
             services.AddControllers();
             
             // For connection to postgres DB (with PostGis)
-            var connection = "Host=localhost;Database=scooters;Username=beam;Password=beam";
-            services.AddDbContext<ScooterDbContext>(options => options.UseNpgsql(connection));
+            var connection = "host=db;port=5432;database=scooters;username=beam;password=beam";
+            services.AddDbContext<ScooterDbContext>(options => options.UseNpgsql(Configuration["DB_CONNECTION_STRING"]));
             
             // Adding objects for dependency injection
             services.AddScoped<IScooterRepository, ScooterRepository>();
