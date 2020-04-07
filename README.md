@@ -45,9 +45,13 @@ git clone git@github.com:Lucria/beam_intern_test.git
 ### Running
 From within the root folder, run 
 ```
+docker volume create test_db
 docker-compose up -d --build
 ```
-This will rebuild all images 
+The first command will create a docker volume called `test_db`. This directory will
+be used by our PostgresSQL database later on.
+
+The second command will rebuild all images 
 and deploy the backend API server as well as the PostgresSQL
 database.
 
