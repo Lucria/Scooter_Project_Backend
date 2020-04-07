@@ -44,6 +44,19 @@ namespace Beam_intern.Scooter.Controllers
             return Ok(ToScooterResponse(result));
         }
 
+        [HttpPost]
+        public async Task<ActionResult<ScooterDomainModel>> Patch([FromBody] ScooterRequestModel requestModel)
+        {
+            Guid newId = new Guid();
+            var result = await _repository.Add(newId, requestModel.latitude, requestModel.longitude);
+            if (result == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(ToScooterResponse(result));
+        }
+
         [HttpPut("{id}")]
         public async Task<ActionResult<ScooterDomainModel>> Put(Guid id, [FromBody] ScooterRequestModel requestModel)
         {
