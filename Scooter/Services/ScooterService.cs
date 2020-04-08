@@ -53,9 +53,10 @@ namespace Beam_intern.Scooter.Services
             foreach (ScooterDomainModel scooter in allScooters)
             {
                 Coordinates scooterCoordinate = new Coordinates(scooter.Latitude, scooter.Longitude);
-                if (CoordinatesDistanceExtensions.DistanceTo(scooterCoordinate, centreCoordinate) <= radius)
+                if ((CoordinatesDistanceExtensions.DistanceTo(scooterCoordinate, centreCoordinate) <= radius) && nearestNumberOfScooters > 0)
                 {
                     allNearestScooters.Append(scooter);
+                    nearestNumberOfScooters--;
                 }
             }
             return allNearestScooters;
