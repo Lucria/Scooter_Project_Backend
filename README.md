@@ -9,7 +9,8 @@ The goal of building this system is for Beam's Software Engineering Internship
 Exercise. 
 
 This repository will house both the backend and the database for this system. Both the backend and 
-the database system will be hosted from Docker containers. 
+the database system will be hosted from Docker containers. The backend API server is done in C# 
+utilizing .NET Core, while the database is a PostgresSQL database. 
 
 ## Rough Architecture Diagram
 ![Architecture Diagram](Rough%20Architecture%20Diagram.png) 
