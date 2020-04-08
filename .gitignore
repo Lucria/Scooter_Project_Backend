@@ -4,9 +4,11 @@
 [Bb]in/
 [Oo]bj/
 
-# Common node modules locations
-/node_modules
+# Frontend Stuff
+node_modules/
 /wwwroot/node_modules
+.nyc_output/
+coverage/
 
 
 ### Rider ###
