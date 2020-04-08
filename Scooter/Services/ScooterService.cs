@@ -51,19 +51,33 @@ namespace Beam_intern.Scooter.Services
             int radius = scooterClosestDomainModel.Radius;
             IEnumerable<ScooterDomainModel> allScooters = _repository.GetAll().Result;
             List<ScooterDomainModel> allNearestScooters = new List<ScooterDomainModel>();
+            List<ScooterDomainModel> constrainNearestScooters = new List<ScooterDomainModel>();
+            List <Tuple<double, Guid>> distanceOfScooters = new List<Tuple<double, Guid>>();
             foreach (ScooterDomainModel scooter in allScooters)
             {
-                Coordinates scooterCoordinate = new Coordinates(scooter.Latitude, scooter.Longitude);
-                if (!(CoordinatesDistanceExtensions.GetDistance(
-                          scooterCoordinate.Longitude,
-                          scooterCoordinate.Latitude,
-                          centreCoordinate.Longitude,
-                          centreCoordinate.Latitude) <= radius) || nearestNumberOfScooters <= 0) continue;
+                double distance = CoordinatesDistanceExtensions.GetDistance(
+                    scooter.Longitude,
+                    scooter.Latitude,
+                    centreCoordinate.Longitude,
+                    centreCoordinate.Latitude);
+                if (!(distance <= radius)) continue;
                 allNearestScooters.Add(scooter);
-                nearestNumberOfScooters--;
+                distanceOfScooters.Add(new Tuple<double, Guid>(distance, scooter.Id));
             }
 
-            return allNearestScooters;
+            distanceOfScooters.Sort((x,y) => x.Item1.CompareTo(y.Item1));
+
+            while (nearestNumberOfScooters > 0 && distanceOfScooters.Any())
+            {
+                var initialElement = distanceOfScooters.First();
+                ScooterDomainModel desiredScooter = allNearestScooters.Find(model => 
+                    model.Id.Equals(initialElement.Item2));
+                constrainNearestScooters.Add(desiredScooter);
+                Console.WriteLine("Chosen UUID" + desiredScooter.Id);
+                nearestNumberOfScooters--;
+                distanceOfScooters.Remove(initialElement);
+            }
+            return constrainNearestScooters;
         }
     }
 }
