@@ -50,26 +50,19 @@ namespace Beam_intern.Scooter.Services
             int nearestNumberOfScooters = scooterClosestDomainModel.NearestNumberOfScooters;
             int radius = scooterClosestDomainModel.Radius;
             IEnumerable<ScooterDomainModel> allScooters = _repository.GetAll().Result;
-            IEnumerable<ScooterDomainModel> allNearestScooters = new List<ScooterDomainModel>();
+            List<ScooterDomainModel> allNearestScooters = new List<ScooterDomainModel>();
             foreach (ScooterDomainModel scooter in allScooters)
             {
                 Coordinates scooterCoordinate = new Coordinates(scooter.Latitude, scooter.Longitude);
-                Console.WriteLine("ID is " + scooter.Id);
-                Console.WriteLine("Latitude is " + scooter.Latitude);
-                Console.WriteLine("Calculated Distance is");
-                Console.WriteLine(CoordinatesDistanceExtensions.GetDistance(
-                    scooterCoordinate.Longitude,
-                    scooterCoordinate.Latitude,
-                    centreCoordinate.Longitude,
-                    centreCoordinate.Latitude));
                 if (!(CoordinatesDistanceExtensions.GetDistance(
-                    scooterCoordinate.Longitude,
-                    scooterCoordinate.Latitude,
-                    centreCoordinate.Longitude,
-                    centreCoordinate.Latitude) <= radius) || nearestNumberOfScooters <= 0) continue;
-                allNearestScooters.Append(scooter);
+                          scooterCoordinate.Longitude,
+                          scooterCoordinate.Latitude,
+                          centreCoordinate.Longitude,
+                          centreCoordinate.Latitude) <= radius) || nearestNumberOfScooters <= 0) continue;
+                allNearestScooters.Add(scooter);
                 nearestNumberOfScooters--;
             }
+
             return allNearestScooters;
         }
     }
