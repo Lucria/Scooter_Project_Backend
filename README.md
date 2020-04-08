@@ -8,7 +8,7 @@ a certain distance, and plot it onto a map.
 The goal of building this system is for Beam's Software Engineering Internship
 Exercise. 
 
-This repository will house both the backend for this system. Both the backend and 
+This repository will house both the backend and the database for this system. Both the backend and 
 the database system will be hosted from Docker containers. 
 
 ## Rough Architecture Diagram
