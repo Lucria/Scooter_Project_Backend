@@ -47,7 +47,7 @@ git clone git@github.com:Lucria/beam_intern_test.git
 ### Restoring NuGet Dependencies
 1) Run `dotnet restore` in the root directory to restore NuGet dependencies.
 
-## Full Instructions On How To Run
+# Instructions On How To Run
 1) Navigate to the root directory of this project
 2) Create a volume mount for the database using `docker volume create test_db`. 
 The volume will be used by our PostgresSQL database later on.
