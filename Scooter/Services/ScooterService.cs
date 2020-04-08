@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Beam_intern.Scooter.CoordinatesHelper;
 using Beam_intern.Scooter.Domain;
 using Beam_intern.Scooter.Repository;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Beam_intern.Scooter.Services
 {
@@ -53,11 +54,21 @@ namespace Beam_intern.Scooter.Services
             foreach (ScooterDomainModel scooter in allScooters)
             {
                 Coordinates scooterCoordinate = new Coordinates(scooter.Latitude, scooter.Longitude);
-                if ((CoordinatesDistanceExtensions.DistanceTo(scooterCoordinate, centreCoordinate) <= radius) && nearestNumberOfScooters > 0)
-                {
-                    allNearestScooters.Append(scooter);
-                    nearestNumberOfScooters--;
-                }
+                Console.WriteLine("ID is " + scooter.Id);
+                Console.WriteLine("Latitude is " + scooter.Latitude);
+                Console.WriteLine("Calculated Distance is");
+                Console.WriteLine(CoordinatesDistanceExtensions.GetDistance(
+                    scooterCoordinate.Longitude,
+                    scooterCoordinate.Latitude,
+                    centreCoordinate.Longitude,
+                    centreCoordinate.Latitude));
+                if (!(CoordinatesDistanceExtensions.GetDistance(
+                    scooterCoordinate.Longitude,
+                    scooterCoordinate.Latitude,
+                    centreCoordinate.Longitude,
+                    centreCoordinate.Latitude) <= radius) || nearestNumberOfScooters <= 0) continue;
+                allNearestScooters.Append(scooter);
+                nearestNumberOfScooters--;
             }
             return allNearestScooters;
         }

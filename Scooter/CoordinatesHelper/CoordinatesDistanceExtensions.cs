@@ -4,27 +4,16 @@ namespace Beam_intern.Scooter.CoordinatesHelper
 {
     public static class CoordinatesDistanceExtensions
     {
-        public static double DistanceTo(this Coordinates baseCoordinates, Coordinates targetCoordinates)
+        public static double GetDistance(double longitude, double latitude, double otherLongitude, double otherLatitude)
         {
-            return DistanceTo(baseCoordinates, targetCoordinates, UnitOfLength.Kilometers);
-        }
+            // Resulting distance is in metres!
+            var d1 = latitude * (Math.PI / 180.0);
+            var num1 = longitude * (Math.PI / 180.0);
+            var d2 = otherLatitude * (Math.PI / 180.0);
+            var num2 = otherLongitude * (Math.PI / 180.0) - num1;
+            var d3 = Math.Pow(Math.Sin((d2 - d1) / 2.0), 2.0) + Math.Cos(d1) * Math.Cos(d2) * Math.Pow(Math.Sin(num2 / 2.0), 2.0);
 
-        public static double DistanceTo(this Coordinates baseCoordinates, Coordinates targetCoordinates, UnitOfLength unitOfLength)
-        {
-            var baseRad = Math.PI * baseCoordinates.Latitude / 180;
-            var targetRad = Math.PI * targetCoordinates.Latitude/ 180;
-            var theta = baseCoordinates.Longitude - targetCoordinates.Longitude;
-            var thetaRad = Math.PI * theta / 180;
-
-            double dist =
-                Math.Sin(baseRad) * Math.Sin(targetRad) + Math.Cos(baseRad) *
-                Math.Cos(targetRad) * Math.Cos(thetaRad);
-            dist = Math.Acos(dist);
-
-            dist = dist * 180 / Math.PI;
-            dist = dist * 60 * 1.1515;
-
-            return unitOfLength.ConvertFromMiles(dist);
+            return 6376500.0 * (2.0 * Math.Atan2(Math.Sqrt(d3), Math.Sqrt(1.0 - d3)));
         }
     }
 }
