@@ -8,8 +8,8 @@ a certain distance, and plot it onto a map.
 The goal of building this system is for Beam's Software Engineering Internship
 Exercise. 
 
-This repository will house both the frontend and backend for this system.
-The database system will be hosted using a Docker file.
+This repository will house both the backend for this system. Both the backend and 
+the database system will be hosted from Docker containers. 
 
 ## Rough Architecture Diagram
 ![Architecture Diagram](Rough%20Architecture%20Diagram.png) 
@@ -17,7 +17,7 @@ The database system will be hosted using a Docker file.
 ## Prerequisites
 * .NET Core v3.1
 
-    You may type `dotnet --version` to verify that the downloaded version is 3.0 or above. 
+    You may type `dotnet --version` to verify that the downloaded version is 3.1 or above. 
     Follow the instructions [here](https://dotnet.microsoft.com/download) to download .NET Core.
 
 * Docker **(Essential)**
@@ -46,10 +46,6 @@ git clone git@github.com:Lucria/beam_intern_test.git
 ### Web API Server and Database
 1) Run `dotnet restore` in the root directory to restore NuGet dependencies.
 
-### Frontend
-1) Run `yarn` to restore all dependencies and modules.
-2) Run `yarn dev` to start up the frontend webpage. 
-
 ## Running
 From within the root folder, run 
 ```
@@ -69,4 +65,4 @@ Automated Testing to be added in the future
 
 ## Deployment
 
-TODO: To be added in the future
+To be added in the future
