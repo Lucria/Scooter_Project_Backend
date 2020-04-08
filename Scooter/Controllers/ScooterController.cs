@@ -17,14 +17,12 @@ namespace Beam_intern.Scooter.Controllers
     [Route("scooters/")]
     public class ScooterController : ControllerBase
     {
-        private readonly IScooterRepository _repository;
         private readonly ILogger<ScooterController> _logger;
         private readonly IScooterService _scooterService;
 
-        public ScooterController(ILogger<ScooterController> logger, IScooterRepository repository, IScooterService scooterService)
+        public ScooterController(ILogger<ScooterController> logger, IScooterService scooterService)
         {
             _logger = logger;
-            _repository = repository;
             _scooterService = scooterService;
         }
 
