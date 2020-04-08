@@ -48,7 +48,7 @@ namespace Beam_intern.Scooter.Controllers
         }
 
         [HttpPost("closest/")]
-        public ActionResult<IEnumerable<ScooterDomainModel>> GetClosest([FromBody] ScooterClosestRequestModel scooterClosestRequestModel)
+        public ActionResult<IEnumerable<ScooterClosestDomainModel>> GetClosest([FromBody] ScooterClosestRequestModel scooterClosestRequestModel)
         // X number of scooters
         // within Y metres radius
         // At chosen latitude and longitude
