@@ -2,9 +2,9 @@
 {
     public class ScooterClosestRequestModel
     {
-        public int NearestNumberOfScooters { get; }
-        public int Radius { get; }
-        public double ChosenLatitude { get; }
-        public double ChosenLongitude { get; }
+        public int NearestNumberOfScooters { get; set; }
+        public int Radius { get; set; }
+        public double ChosenLatitude { get; set; }
+        public double ChosenLongitude { get; set; }
     }
 }
