@@ -44,26 +44,24 @@ Using SSH:
 git clone git@github.com:Lucria/beam_intern_test.git
 ```
 
-### Web API Server and Database
+### Restoring NuGet Dependencies
 1) Run `dotnet restore` in the root directory to restore NuGet dependencies.
 
-## Running
-From within the root folder, run 
-```
-docker volume create test_db
-docker-compose up -d --build
-```
-The first command will create a docker volume called `test_db`. This directory will
-be used by our PostgresSQL database later on.
-
-The second command will rebuild all images 
-and deploy the backend API server as well as the PostgresSQL
-database.
+## Full Instructions On How To Run
+1) Navigate to the root directory of this project
+2) Create a volume mount for the database using `docker volume create test_db`. 
+The volume will be used by our PostgresSQL database later on.
+3) Start the docker containers for the API server and the database using `docker-compose up -d --build`.
+This command will forcefully rebuild all images to ensure images are the latest.
 
 ## Testing
 
 Automated Testing to be added in the future
 
 ## Deployment
+
+To be added in the future
+
+## License
 
 To be added in the future
