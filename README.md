@@ -45,7 +45,7 @@ git clone git@github.com:Lucria/beam_intern_test.git
 ```
 
 ### Restoring NuGet Dependencies
-1) Run `dotnet restore` in the root directory to restore NuGet dependencies.
+1) Run `dotnet restore "Beam_intern.csproj"` in the root directory to restore NuGet dependencies.
 
 # Instructions On How To Run
 1) Navigate to the root directory of this project
