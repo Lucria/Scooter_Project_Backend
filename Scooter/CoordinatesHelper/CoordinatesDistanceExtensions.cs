@@ -4,6 +4,13 @@ namespace Beam_intern.Scooter.CoordinatesHelper
 {
     public static class CoordinatesDistanceExtensions
     {
+        /**
+         * This method is responsible for calculating the actual distance between two points.
+         * As points are given in latitude and longitude,
+         * traditional Cartesian calculations cannot be applied.
+         * This method calculates the distance between two points and returns
+         * the distance in METRES.
+         */
         public static double GetDistance(double longitude, double latitude, double otherLongitude, double otherLatitude)
         {
             // Resulting distance is in metres!
