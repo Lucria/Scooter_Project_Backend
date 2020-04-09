@@ -17,7 +17,10 @@ namespace Beam_intern.Scooter.Repository
             _databaseContext = databaseContext;
         }
         
-        // All methods should map data models to domain models
+        /**
+         * Read operation
+         * Retrieves the data of all scooters available in the database.
+         */
         public async Task<IEnumerable<ScooterDomainModel>> GetAll()
         {
             var scooterDataModels = await _databaseContext.Scooters.ToListAsync();
@@ -25,22 +28,24 @@ namespace Beam_intern.Scooter.Repository
             return scooterDomainModels;
         }
 
+        /**
+         * Read operation
+         * One of the 4 main operations under CRUD.
+         * Reads the data for a specific scooter using its UUID
+         */
         public async Task<ScooterDomainModel> Get(Guid id)
         {
             var scooterDataModel = await _databaseContext.Scooters.FindAsync(id);
-            ScooterDomainModel scooterDomainModel;
-            if (scooterDataModel == null)
-            {
-                scooterDomainModel = null;
-            }
-            else
-            {
-                scooterDomainModel = ToScooterDomainModel(scooterDataModel);
-            }
+            var scooterDomainModel = scooterDataModel == null ? null : ToScooterDomainModel(scooterDataModel);
 
             return scooterDomainModel;
         }
 
+        /**
+         * Create operation
+         * One of the 4 main operations under CRUD
+         * Adds a new Scooter object to the database
+         */
         public async Task<ScooterDomainModel> Add(ScooterDomainModel scooterDomainModel)
         {
             ScooterDataModel scooterDataModel = ToScooterDataModel(scooterDomainModel);
@@ -51,6 +56,11 @@ namespace Beam_intern.Scooter.Repository
             return await Get(scooterDomainModel.Id);
         }
 
+        /**
+         * Update operation
+         * One of the 4 main operations under CRUD
+         * Updates a Scooter with new latitude and longitude.
+         */
         public async Task<ScooterDomainModel> Update(Guid id, double latitude, double longitude)
         {
             var scooterDataModel = await _databaseContext.Scooters.FindAsync(id);
@@ -67,6 +77,11 @@ namespace Beam_intern.Scooter.Repository
             return ToScooterDomainModel(scooterDataModel);
         }
 
+        /**
+         * Delete operation
+         * One of the 4 main operations under CRUD
+         * Deletes a Scooter via the UUID.
+         */
         public async Task<ScooterDomainModel> Delete(Guid id)
         {
             var scooterDataModel = await _databaseContext.Scooters.FindAsync(id);
@@ -80,6 +95,11 @@ namespace Beam_intern.Scooter.Repository
             return ToScooterDomainModel(scooterDataModel);
         }
 
+        /**
+         * Method responsible for converting a Data model to a Domain model.
+         * Data models are used for communication between the Repository and the Databases (through ORM)
+         * Domain models are used for communication between the Repository and the Domain layer.
+         */
         private ScooterDomainModel ToScooterDomainModel(ScooterDataModel scooterDataModel)
         {
             return new ScooterDomainModel(
@@ -88,6 +108,11 @@ namespace Beam_intern.Scooter.Repository
                 scooterDataModel.Longitude);
         }
 
+        /**
+         * Method responsible for converting a Domain model to a Data model.
+         * Data models are used for communication between the Repository and the Databases (through ORM)
+         * Domain models are used for communication between the Repository and the Domain layer.
+         */
         private ScooterDataModel ToScooterDataModel(ScooterDomainModel scooterDomainModel)
         {
             return new ScooterDataModel
