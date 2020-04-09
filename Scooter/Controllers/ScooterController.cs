@@ -94,7 +94,7 @@ namespace Beam_intern.Scooter.Controllers
         [HttpPost]
         public async Task<ActionResult<ScooterDomainModel>> Post([FromBody] ScooterRequestModel requestModel)
         {
-            ScooterDomainModel scooterDomainModel = new ScooterDomainModel(Guid.NewGuid(), requestModel.latitude, requestModel.longitude);
+            ScooterDomainModel scooterDomainModel = new ScooterDomainModel(Guid.NewGuid(), requestModel.Latitude, requestModel.Longitude);
             var result = await _scooterService.Add(scooterDomainModel);
             if (result == null)
             {
@@ -114,7 +114,7 @@ namespace Beam_intern.Scooter.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<ScooterDomainModel>> Put(Guid id, [FromBody] ScooterRequestModel requestModel)
         {
-            var result = await _scooterService.Update(id, requestModel.latitude, requestModel.longitude);
+            var result = await _scooterService.Update(id, requestModel.Latitude, requestModel.Longitude);
             if (result == null)
             {
                 return NotFound();
